@@ -34,7 +34,7 @@ export const TimelineModalContent: React.FC<TimelineModalContentProps> = ({
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
         />
       </div>
 
@@ -50,7 +50,7 @@ export const TimelineModalContent: React.FC<TimelineModalContentProps> = ({
           type="date"
           value={start}
           onChange={(e) => setStart(e.target.value)}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
         />
       </div>
 
@@ -66,7 +66,7 @@ export const TimelineModalContent: React.FC<TimelineModalContentProps> = ({
           type="date"
           value={end}
           onChange={(e) => setEnd(e.target.value)}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
         />
       </div>
 
@@ -81,7 +81,7 @@ export const TimelineModalContent: React.FC<TimelineModalContentProps> = ({
         <button
           type="button"
           onClick={() => onSave({ name, start, end, id: item.id })}
-          className="px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700"
+          className="px-4 py-2 rounded-md bg-indigo-500 text-white hover:bg-indigo-600"
         >
           Save
         </button>

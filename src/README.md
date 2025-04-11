@@ -25,9 +25,6 @@ This project implements a modular and interactive horizontal **timeline componen
 - **Add Zoom & Pan**  
   Implementing zoom (via scroll or pinch) and horizontal pan would greatly improve UX for long or dense timelines.
 
-- **Keyboard and A11y Enhancements**  
-  The modal already respects basic accessibility rules, but a more complete keyboard and screen reader support layer could be added.
-
 - **Testing Coverage**  
   Due to time constraints, tests were not included — this would be a priority in a production-grade implementation.
 
@@ -56,6 +53,11 @@ This project implements a modular and interactive horizontal **timeline componen
 - **Integration Tests**  
   - Simulate user flows: open modal → edit → save.
   - Ensure updates reflect correctly and events are emitted to the parent.
+
+- **Responsiveness and Mobile Testing**  
+  - Test layout adaptability across common breakpoints (e.g., 320px, 768px, 1024px)  
+  - Ensure timeline remains scrollable and items are clearly readable on small screens  
+  - Validate that modals are accessible and usable via touch on mobile  
 
 - **Visual Regression**  
   - Add Storybook stories and use Chromatic for snapshot-based UI diffing.
@@ -113,6 +115,4 @@ src/
 - **Vite (fast build + HMR)**
 
 - **Headless UI or custom modal (if used)**
-
-- **No Redux / No Context API (props-based only)**
 

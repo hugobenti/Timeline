@@ -1,10 +1,10 @@
 import React from "react";
 import {
   useTimelineHeader,
-  normalizeToUtcMidnight,
-  toUtcDateString,
-  getUtcMonthLabel,
 } from "./useTimelineHeader";
+import { normalizeToUtcMidnight } from "../../../utils/normalizeToUtcMidnight";
+import { toUtcDateString } from "../../../utils/toUtcDateString";
+import { getUtcMonthLabel } from "../../../utils/getUtcMonthLabel";
 
 interface TimelineHeaderProps {
   minDate: Date; // The earliest date in the timeline.

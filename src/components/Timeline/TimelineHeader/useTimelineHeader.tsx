@@ -1,56 +1,8 @@
 import { useMemo } from "react";
-
-/**
- * Converts a Date to UTC midnight (00:00:00 UTC).
- * This ensures that the date won't roll forward/backward
- * if the user's local time is behind/ahead of UTC.
- */
-export function normalizeToUtcMidnight(date: Date): Date {
-  return new Date(
-    Date.UTC(
-      date.getUTCFullYear(),
-      date.getUTCMonth(),
-      date.getUTCDate(),
-      0,
-      0,
-      0,
-      0
-    )
-  );
-}
-
-/**
- * Returns the inclusive difference in days between two UTC‐midnight dates.
- */
-export function daysBetweenUtc(start: Date, end: Date): number {
-  const msPerDay = 1000 * 60 * 60 * 24;
-  return Math.floor((end.getTime() - start.getTime()) / msPerDay);
-}
-
-/**
- * Converts a Date to a "YYYY-MM-DD" string based on its UTC fields,
- * so we never mix in local time.
- */
-export function toUtcDateString(date: Date): string {
-  const y = date.getUTCFullYear();
-  const m = String(date.getUTCMonth() + 1).padStart(2, "0");
-  const d = String(date.getUTCDate()).padStart(2, "0");
-  return `${y}-${m}-${d}`;
-}
-
-/**
- * Creates a short label for the month/year (e.g., "Apr 2025") using UTC fields.
- * We avoid using date.toLocaleString() to prevent local TZ shifts.
- */
-export function getUtcMonthLabel(date: Date): string {
-  const MONTHS_SHORT = [
-    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-  ];
-  const monthName = MONTHS_SHORT[date.getUTCMonth()];
-  const year = date.getUTCFullYear();
-  return `${monthName} ${year}`;
-}
+import { normalizeToUtcMidnight } from "../../../utils/normalizeToUtcMidnight";
+import { daysBetweenUtc } from "../../../utils/daysBetweenUtc";
+import { getUtcMonthLabel } from "../../../utils/getUtcMonthLabel";
+import { toUtcDateString } from "../../../utils/toUtcDateString";
 
 /**
  * Optionally converts a Date to a "YYYY-MM-DD" string based on local time.
@@ -85,7 +37,7 @@ export interface UseTimelineHeaderResult {
  * @param maxDate The latest date to be displayed in the timeline.
  */
 export function useTimelineHeader(
-  minDate: Date, 
+  minDate: Date,
   maxDate: Date
 ): UseTimelineHeaderResult {
   return useMemo(() => {
@@ -126,15 +78,17 @@ export function useTimelineHeader(
       }
 
       // Advance by exactly one UTC day.
-      currentDate = new Date(Date.UTC(
-        currentDate.getUTCFullYear(),
-        currentDate.getUTCMonth(),
-        currentDate.getUTCDate() + 1,
-        0,
-        0,
-        0,
-        0
-      ));
+      currentDate = new Date(
+        Date.UTC(
+          currentDate.getUTCFullYear(),
+          currentDate.getUTCMonth(),
+          currentDate.getUTCDate() + 1,
+          0,
+          0,
+          0,
+          0
+        )
+      );
     }
 
     // 5) Finalize the last month group and pad to at least 7 days.
@@ -145,15 +99,17 @@ export function useTimelineHeader(
 
       for (let i = 0; i < extraDays; i++) {
         // Advance by one day (UTC) and add its label.
-        currentDate = new Date(Date.UTC(
-          currentDate.getUTCFullYear(),
-          currentDate.getUTCMonth(),
-          currentDate.getUTCDate() + 1,
-          0,
-          0,
-          0,
-          0
-        ));
+        currentDate = new Date(
+          Date.UTC(
+            currentDate.getUTCFullYear(),
+            currentDate.getUTCMonth(),
+            currentDate.getUTCDate() + 1,
+            0,
+            0,
+            0,
+            0
+          )
+        );
         dateLabels.push(toUtcDateString(currentDate));
       }
     }
@@ -163,7 +119,7 @@ export function useTimelineHeader(
     return {
       monthGroups,
       dateLabels,
-      totalDays
+      totalDays,
     };
   }, [minDate, maxDate]);
 }
